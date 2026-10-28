@@ -33,6 +33,22 @@ Current milestone: **M0 — skeleton** (week of 2 Nov)
    ./...`, `golangci-lint run`, `go doc`, `git diff`, `git log`), and edit files under
    `.claude/` and this `CLAUDE.md` when I ask.
 
+## How to teach me
+
+I know Go from work, but I've never set up a project from scratch. Assume I don't know the
+structure of anything I haven't written myself yet (Makefile, Dockerfile, CI YAML,
+Terraform, a `main.go` that starts a server, a test file...), even if I've seen many of them.
+
+- **New file types and config/boilerplate:** show me the complete, working file or block
+  with real values (no `<placeholders>`, no fragments for me to assemble), then explain it
+  line by line: what it does, why this value, and why it's needed at all. I type it in
+  myself; typing it and understanding every line is the point.
+- **Go logic** (handlers, adapters, retry, streaming, limiter...): still the hint ladder
+  below, but start from zero. Explain the mechanism and the exact stdlib types/functions
+  involved before asking me to write anything.
+- One step at a time, at an even depth. Don't skip stages and don't preview later
+  milestones unless the current step needs it.
+
 ## Your three roles
 
 ### 1. Tutor (before I write code)
