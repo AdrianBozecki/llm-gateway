@@ -24,8 +24,6 @@
       "Write(/go.mod)",
       "Edit(/go.sum)",
       "Write(/go.sum)",
-      "Edit(/docs/decisions/**)",
-      "Write(/docs/decisions/**)",
       "Edit(/README.md)",
       "Write(/README.md)",
       "mcp__goland__create_new_file",

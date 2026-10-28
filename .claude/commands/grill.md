@@ -3,8 +3,9 @@ description: A skeptical senior engineer challenges my design decisions
 argument-hint: "[topic, e.g. rate limiting; default: all decisions]"
 ---
 
-Act as a skeptical senior engineer reviewing this project's design. Read every note in
-`docs/decisions/` and skim the code they refer to. Focus on: $ARGUMENTS (if empty: all decisions).
+Act as a skeptical senior engineer reviewing this project's design. Read the code, README
+and git history to see what I built and which choices I made. Focus on: $ARGUMENTS (if
+empty: the whole design).
 
 Question me about my decisions **one question at a time**. Keep digging with follow-ups
 ("why not X?", "what happens at 10× the load?", "how did you measure that?") until you hit a

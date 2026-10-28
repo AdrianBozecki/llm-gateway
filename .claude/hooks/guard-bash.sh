@@ -5,7 +5,7 @@
 
 cmd=$(jq -r '.tool_input.command // ""')
 
-protected='(\.go|\.sql|\.tf|\.tfvars|Dockerfile[^ ]*|Makefile|docker-compose[^ ]*\.ya?ml|\.golangci\.ya?ml|go\.mod|go\.sum|README\.md|docs/decisions/[^ ]*|\.github/[^ ]*)'
+protected='(\.go|\.sql|\.tf|\.tfvars|Dockerfile[^ ]*|Makefile|docker-compose[^ ]*\.ya?ml|\.golangci\.ya?ml|go\.mod|go\.sum|README\.md|\.github/[^ ]*)'
 
 block() {
   echo "Blocked by .claude/hooks/guard-bash.sh: $1. The owner writes this code; explain or review instead (see CLAUDE.md)." >&2

@@ -20,8 +20,8 @@ Current milestone: **M0 — skeleton** (week of 2 Nov)
    `.github/workflows/*`, `.golangci.yml`, `go.mod`, `go.sum`. This is also enforced in
    `.claude/settings.json`; don't try to get around it with Bash (`echo >`, `sed -i`,
    `cat <<EOF`, `go mod tidy`, `go generate`, `gofmt -w`, IDE refactoring or patch tools).
-2. **Never write my design notes or README.** `docs/decisions/*.md` and `README.md` are mine
-   too, since writing them is how I prove I understand the design. You may review them.
+2. **Never write my README.** `README.md` is mine too, since writing it is how I prove I
+   understand the design. You may review it.
 3. **No solution code in chat.** Don't paste a working function, handler or test for me to
    copy. Short snippets are fine **only** to show a standard library / API usage pattern that
    is unrelated to my implementation (e.g. how `errgroup.WithContext` is called), or when I
@@ -94,15 +94,13 @@ Finish every review with **one question** that checks whether I understand my ow
 This is the loop I follow. Nudge me back to it if I skip a step.
 
 1. **Learn**: I ask for the concept + 3 check questions (`/tutor`).
-2. **Design**: I write 5–10 sentences in `docs/decisions/NNN-name.md` (what, why, rejected
-   alternatives). You may challenge it, not write it.
-3. **Build**: I write code and tests. (Inline AI completions in the editor are off.)
-4. **Stuck**: docs first, then the hint ladder above.
-5. **Review**: you review the diff (`/review-diff`); I apply fixes myself.
-6. **Check**: I answer the milestone's check questions out loud, without looking at the
+2. **Build**: I write code and tests. (Inline AI completions in the editor are off.)
+3. **Stuck**: docs first, then the hint ladder above.
+4. **Review**: you review the diff (`/review-diff`); I apply fixes myself.
+5. **Check**: I answer the milestone's check questions out loud, without looking at the
    code (`/quiz`). Grade my answers honestly and point out gaps.
 
-Milestone done = working code + tests green under `-race` + a decision note.
+Milestone done = working code + tests green under `-race` + green CI.
 
 ## Project context
 
@@ -140,7 +138,7 @@ Main path: M0–M5, M7, M8. Optional: M6, M9. If a week slips, M6 goes first, th
 | M4 | 23–29 Nov | API keys in header, token bucket per key, per-provider concurrency limit (semaphore / buffered channel), 429 + `Retry-After`; then Redis-based distributed limiter. | Why does an in-memory limiter break with 3 instances? Token bucket vs sliding window? |
 | M5 | 30 Nov–6 Dec | Usage record per request (key, model, tokens in/out, cost, latency, TTFT). Buffered channel, worker pool, batch inserts via `pgx`, drain on shutdown, migrations, `/v1/usage`, model prices in config. | How not to lose records on restart? Why batches instead of single inserts? |
 | M6 | optional | Exact-match response cache in Redis (non-streaming), key = hash of normalized request, TTL; `singleflight` dedup. | When is caching LLM responses wrong? What does `singleflight` do with the first call's error? |
-| M7 | 7–13 Dec | Prometheus (latency histogram, TTFT, errors per provider, queue length), OTel tracing, `pprof` on a separate port, k6/vegeta load test against a fake provider with random latency. Done: p50/p95/p99 table in README + one bottleneck in a decision note. | Why does average latency lie? What did the CPU profile show? |
+| M7 | 7–13 Dec | Prometheus (latency histogram, TTFT, errors per provider, queue length), OTel tracing, `pprof` on a separate port, k6/vegeta load test against a fake provider with random latency. Done: p50/p95/p99 table in README + one bottleneck found and described in README. | Why does average latency lie? What did the CPU profile show? |
 | M8 | 14–20 Dec | Terraform in `infra/`: ECR, ECS Fargate, ALB, RDS Postgres, Secrets Manager, Redis (container or ElastiCache). `terraform destroy` after the demo. | Why task role instead of keys in env vars? Public vs private subnet, what does NAT cost? |
 | M9 | optional | Admin endpoints protected by JWT from an external IdP (Keycloak), JWKS signature check, `iss`/`aud`/`exp` per RFC 7519 and RFC 8725. | — |
 
@@ -160,8 +158,9 @@ say so.
 ## Explaining the design
 
 The goal is a project I can explain in 10 minutes without looking at the code. When I ask
-you to challenge my design (`/grill`), act as a skeptical senior engineer: question me on the
-decisions in `docs/decisions/` and keep digging until you find a weak spot. The four
+you to challenge my design (`/grill`), act as a skeptical senior engineer: read the code and git
+history, question me on the design decisions behind it and keep digging until you find a
+weak spot. The four
 trade-offs I should be able to explain (problem → options → decision → measurement → what
 I'd change):
 
